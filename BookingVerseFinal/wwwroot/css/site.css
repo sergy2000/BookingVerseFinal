@@ -1,0 +1,42 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.container {
+    max-width: 900px;
+    margin-top: 50px;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+.tooltip-inner {
+    background-color: #343a40;
+    color: #ffffff;
+    border-radius: 0.25rem;
+}
+
+.tooltip-arrow::before {
+    border-top-color: #343a40;
+}

@@ -1,68 +1,65 @@
 ﻿@page "/"
 @using BookingVerse.Components.Models
-@using System;
 @using BookingVerse.Components.Services
 @inject EventService EventService
 
-<h1>Events</h1>
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1><i class="bi bi-calendar-event-fill"></i> Events</h1>
+        <button class="btn btn-primary" @onclick="ShowTable" data-bs-toggle="tooltip" title="Toggle Events Table">
+            <i class="bi bi-eye"></i> Show/Hide Events
+        </button>
+    </div>
 
+    @if (tableActive)
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Event in storedEvents)
+                    {
+                        <tr @onclick="() => AddItemToWarenkorb(Event)" data-bs-toggle="tooltip" title="Click to add to Warenkorb">
+                            <td>@Event.Title</td>
+                            <td>@Event.Date.ToShortDateString()</td>
+                            <td>@Event.Location</td>
+                            <td>@Event.Category</td>
+                            <td>@Event.Price€</td>
+                            <td>@Event.Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
 
-<button @onclick="() => ShowTable()">Show</button>
-@if (@TableActive)
-{
-    <table>
-        <thead>
-            <tr>
-                <th> Title </th>
-                <th> Date </th>
-                <th> Location </th>
-                <th> Category </th>
-                <th> Price </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var Event in StoredEvents)
-            {
-                <tr @onclick="() => AddItemToSelection(Event)">
-                    <td> @Event.Title </td>
-                    <td> @Event.Date </td>
-                    <td> @Event.Location </td>
-                    <td> @Event.Category </td>
-                    <td> @Event.Price€ </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
-@code
-{
-    List<Event> StoredEvents;
-    Boolean TableActive;
+@code {
+    private List<Event> storedEvents = new List<Event>();
+    private bool tableActive = false;
 
     protected override void OnInitialized()
     {
-        StoredEvents = new List<Event>();
-
-
         for (int i = 1; i <= 20; i++)
         {
-            StoredEvents.Add(new Event(i.ToString(), $"Event {i}", DateTime.Now, "Hamburg", "Essen gehen", i * i * i, $"Legit Event"));
+            storedEvents.Add(new Event(i.ToString(), $"Event {i}", DateTime.Now, "Hamburg", "Essen gehen", i * i * i, $"Legit Event"));
         }
     }
 
-    void ShowTable() => TableActive = !TableActive;
+    private void ShowTable() => tableActive = !tableActive;
 
-    void AddItemToSelection(Event item)
+    private void AddItemToWarenkorb(Event item)
     {
         EventService.AddToWarenkorb(item);
-        StoredEvents.Remove(item);
-    }
-
-    void RemoveItemFromSelection(Event item)
-    {
-
-        EventService.RemoveFromWarenkorb(item);
-        StoredEvents.Add(item);
+        storedEvents.Remove(item);
     }
 }

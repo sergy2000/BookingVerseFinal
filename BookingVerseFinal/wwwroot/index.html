@@ -6,6 +6,7 @@
     <title>BookingVerseFinal</title>
     <base href="/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/app.css" />
     <link rel="stylesheet" href="BookingVerseFinal.styles.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -23,7 +24,19 @@
         <a class="dismiss">🗙</a>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="_framework/blazor.webview.js" autostart="false"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+    </script>
 
 </body>
 

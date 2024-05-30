@@ -3,40 +3,54 @@
 @using BookingVerse.Components.Services
 @inject EventService EventService
 
-<h3>Warenkorb</h3>
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1><i class="bi bi-cart-fill"></i> Warenkorb</h1>
+    </div>
 
-@if (EventService.GetWarenkorb().Count == 0)
-{
-    <p>No items in the Warenkorb.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var Event in EventService.GetWarenkorb())
-            {
-                <tr @onclick="() => RemoveItemFromWarenkorb(Event)">
-                    <td>@Event.Title</td>
-                    <td>@Event.Date.ToShortDateString()</td>
-                    <td>@Event.Location</td>
-                    <td>@Event.Category</td>
-                    <td>@Event.Price€</td>
-                    <td>@Event.Description</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    @if (EventService.GetWarenkorb().Count == 0)
+    {
+        <div class="alert alert-warning" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i> No items in the Warenkorb.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Event in EventService.GetWarenkorb())
+                    {
+                        <tr>
+                            <td>@Event.Title</td>
+                            <td>@Event.Date.ToShortDateString()</td>
+                            <td>@Event.Location</td>
+                            <td>@Event.Category</td>
+                            <td>@Event.Price€</td>
+                            <td>@Event.Description</td>
+                            <td>
+                                <button class="btn btn-danger" @onclick="() => RemoveItemFromWarenkorb(Event)" data-bs-toggle="tooltip" title="Remove from Warenkorb">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
 
 @code {
     private void RemoveItemFromWarenkorb(Event eventItem)
