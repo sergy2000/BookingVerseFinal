@@ -1,4 +1,4 @@
-﻿namespace BookingVerse.Components.Models
+﻿namespace BookingVerseFinal.Components.Models
 {
     public class Event
     {

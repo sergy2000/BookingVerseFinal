@@ -1,7 +1,8 @@
 ﻿@page "/warenkorb"
-@using BookingVerse.Components.Models
-@using BookingVerse.Components.Services
+@using BookingVerseFinal.Components.Models
+@using BookingVerseFinal.Components.Services
 @inject EventService EventService
+@inject UserService UserService
 
 <div class="container mt-5">
     <div class="text-center mb-4">
@@ -43,6 +44,9 @@
                                 <button class="btn btn-danger" @onclick="() => RemoveItemFromWarenkorb(Event)" data-bs-toggle="tooltip" title="Remove from Warenkorb">
                                     <i class="bi bi-trash"></i>
                                 </button>
+                                <button class="btn btn-success btn-buynow" @onclick="() => BuyItemFromWarenkorb(Event)" data-bs-toggle="tooltip" title="Buy product now">
+                                    <i class="bi bi-cart-check"></i>
+                                </button>
                             </td>
                         </tr>
                     }
@@ -53,8 +57,17 @@
 </div>
 
 @code {
+
+
     private void RemoveItemFromWarenkorb(Event eventItem)
     {
         EventService.RemoveFromWarenkorb(eventItem);
+    }
+
+
+    private void BuyItemFromWarenkorb(Event eventItem)
+    {
+        
+
     }
 }

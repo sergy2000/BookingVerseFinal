@@ -1,4 +1,4 @@
-﻿using BookingVerse.Components.Services;
+﻿using BookingVerseFinal.Components.Services;
 using Microsoft.Extensions.Logging;
 
 namespace BookingVerseFinal
@@ -23,6 +23,8 @@ namespace BookingVerseFinal
 #endif
 
             builder.Services.AddSingleton<EventService>();
+            builder.Services.AddSingleton<UserService>();
+
             return builder.Build();
         }
     }

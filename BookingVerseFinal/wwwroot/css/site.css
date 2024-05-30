@@ -21,6 +21,17 @@ h1 {
     background-color: #007bff;
     border-color: #007bff;
 }
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-buynow {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+    margin-left: 5px;
+}
 
 .container {
     max-width: 900px;

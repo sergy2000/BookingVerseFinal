@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using BookingVerse.Components.Models;
+using BookingVerseFinal.Components.Models;
 
-namespace BookingVerse.Components.Services
+namespace BookingVerseFinal.Components.Services
 {
     public class EventService
     {
