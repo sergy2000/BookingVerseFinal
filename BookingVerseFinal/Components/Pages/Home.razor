@@ -1,25 +1,11 @@
 ﻿@page "/"
 @using BookingVerse.Components.Models
 @using System;
+@using BookingVerse.Components.Services
+@inject EventService EventService
 
 <h1>Events</h1>
 
-@if (Warenkorb.Count != 0)
-{
-    @foreach (var Event in Warenkorb)
-    {
-        <tr @onclick="() => RemoveItemFromSelection(Event)">
-            <td> @Event.Title </td>
-            <td> @Event.Date </td>
-            <td> @Event.Location </td>
-            <td> @Event.Category </td>
-            <td> @Event.Price€ </td>
-            <td> @Event.Description </td>
-        </tr>
-    }
-}
-
-<br />
 
 <button @onclick="() => ShowTable()">Show</button>
 @if (@TableActive)
@@ -52,13 +38,12 @@
 @code
 {
     List<Event> StoredEvents;
-    List<Event> Warenkorb;
     Boolean TableActive;
 
     protected override void OnInitialized()
     {
         StoredEvents = new List<Event>();
-        Warenkorb = new List<Event>();
+
 
         for (int i = 1; i <= 20; i++)
         {
@@ -70,13 +55,14 @@
 
     void AddItemToSelection(Event item)
     {
-        Warenkorb.Add(item);
+        EventService.AddToWarenkorb(item);
         StoredEvents.Remove(item);
     }
 
     void RemoveItemFromSelection(Event item)
     {
-        Warenkorb.Remove(item);
+
+        EventService.RemoveFromWarenkorb(item);
         StoredEvents.Add(item);
     }
 }
