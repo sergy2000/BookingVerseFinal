@@ -1,5 +1,82 @@
 ﻿@page "/"
+@using BookingVerse.Components.Models
+@using System;
 
-<h1>Hello, world!</h1>
+<h1>Events</h1>
 
-Welcome to your new app.
+@if (Warenkorb.Count != 0)
+{
+    @foreach (var Event in Warenkorb)
+    {
+        <tr @onclick="() => RemoveItemFromSelection(Event)">
+            <td> @Event.Title </td>
+            <td> @Event.Date </td>
+            <td> @Event.Location </td>
+            <td> @Event.Category </td>
+            <td> @Event.Price€ </td>
+            <td> @Event.Description </td>
+        </tr>
+    }
+}
+
+<br />
+
+<button @onclick="() => ShowTable()">Show</button>
+@if (@TableActive)
+{
+    <table>
+        <thead>
+            <tr>
+                <th> Title </th>
+                <th> Date </th>
+                <th> Location </th>
+                <th> Category </th>
+                <th> Price </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Event in StoredEvents)
+            {
+                <tr @onclick="() => AddItemToSelection(Event)">
+                    <td> @Event.Title </td>
+                    <td> @Event.Date </td>
+                    <td> @Event.Location </td>
+                    <td> @Event.Category </td>
+                    <td> @Event.Price€ </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    List<Event> StoredEvents;
+    List<Event> Warenkorb;
+    Boolean TableActive;
+
+    protected override void OnInitialized()
+    {
+        StoredEvents = new List<Event>();
+        Warenkorb = new List<Event>();
+
+        for (int i = 1; i <= 20; i++)
+        {
+            StoredEvents.Add(new Event(i.ToString(), $"Event {i}", DateTime.Now, "Hamburg", "Essen gehen", i * i * i, $"Legit Event"));
+        }
+    }
+
+    void ShowTable() => TableActive = !TableActive;
+
+    void AddItemToSelection(Event item)
+    {
+        Warenkorb.Add(item);
+        StoredEvents.Remove(item);
+    }
+
+    void RemoveItemFromSelection(Event item)
+    {
+        Warenkorb.Remove(item);
+        StoredEvents.Add(item);
+    }
+}
