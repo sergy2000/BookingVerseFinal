@@ -41,33 +41,49 @@
                             <td>@Event.Price€</td>
                             <td>@Event.Description</td>
                             <td>
+
                                 <button class="btn btn-danger" @onclick="() => RemoveItemFromWarenkorb(Event)" data-bs-toggle="tooltip" title="Remove from Warenkorb">
                                     <i class="bi bi-trash"></i>
                                 </button>
                                 <button class="btn btn-success btn-buynow" @onclick="() => BuyItemFromWarenkorb(Event)" data-bs-toggle="tooltip" title="Buy product now">
                                     <i class="bi bi-cart-check"></i>
                                 </button>
+
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
+
         </div>
     }
 </div>
+<PopupLogin @ref="popupRef" />
 
 @code {
 
+    private PopupLogin popupRef;
 
     private void RemoveItemFromWarenkorb(Event eventItem)
     {
+
+
         EventService.RemoveFromWarenkorb(eventItem);
     }
 
 
     private void BuyItemFromWarenkorb(Event eventItem)
     {
-        
+
+        if (UserService.GetUser().Count == 0)
+        {
+            popupRef.Show();
+        }
+    }
+
+
 
     }
+
+    
 }
