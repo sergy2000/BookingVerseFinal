@@ -1,0 +1,72 @@
+﻿@page "/orders"
+@using BookingVerseFinal.Components.Services
+@using BookingVerseFinal.Components.Models
+@inject EventService es;
+@inject UserService UserService;
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1><i class="bi bi-cart-fill"></i> Orders</h1>
+    </div>
+
+    <div class="mb-4">
+        @if (CurrentUser != null)
+        {
+            <p><strong>User:</strong> @CurrentUser.FirstName @CurrentUser.LastName</p>
+            <p><strong>Email:</strong> @CurrentUser.Email</p>
+        }
+    </div>
+
+    @if (es.GetOrders().Count == 0)
+    {
+        <div class="alert alert-warning" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i> No items ordered.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Event in es.GetOrders())
+                    {
+                        <tr>
+                            <td>@Event.Title</td>
+                            <td>@Event.Date.ToShortDateString()</td>
+                            <td>@Event.Location</td>
+                            <td>@Event.Category</td>
+                            <td>@Event.Price€</td>
+                            <td>@Event.Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@code {
+    public Account CurrentUser{ get; set; }
+
+    public Orders()
+    {
+        CurrentUser = new Account();
+
+        CurrentUser = UserService.GetUserByEmail();
+
+    }
+
+
+
+
+}

@@ -58,6 +58,27 @@
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
+    <ItemGroup>
+      <AndroidResource Remove="Platforms\iOS\**" />
+      <AndroidResource Remove="Platforms\MacCatalyst\**" />
+      <AndroidResource Remove="Platforms\Tizen\**" />
+      <Compile Remove="Platforms\iOS\**" />
+      <Compile Remove="Platforms\MacCatalyst\**" />
+      <Compile Remove="Platforms\Tizen\**" />
+      <Content Remove="Platforms\iOS\**" />
+      <Content Remove="Platforms\MacCatalyst\**" />
+      <Content Remove="Platforms\Tizen\**" />
+      <EmbeddedResource Remove="Platforms\iOS\**" />
+      <EmbeddedResource Remove="Platforms\MacCatalyst\**" />
+      <EmbeddedResource Remove="Platforms\Tizen\**" />
+      <MauiXaml Remove="Platforms\iOS\**" />
+      <MauiXaml Remove="Platforms\MacCatalyst\**" />
+      <MauiXaml Remove="Platforms\Tizen\**" />
+      <None Remove="Platforms\iOS\**" />
+      <None Remove="Platforms\MacCatalyst\**" />
+      <None Remove="Platforms\Tizen\**" />
+    </ItemGroup>
+
    
 
     <ItemGroup>

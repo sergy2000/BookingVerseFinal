@@ -46,7 +46,7 @@
 </div>
 
 @code {
-    private User newUser = new User();
+    private Account newUser = new Account();
 
     [Parameter]
     public bool IsVisible { get; set; }
@@ -55,7 +55,7 @@
     public EventCallback<bool> IsVisibleChanged { get; set; }
 
     [Parameter]
-    public EventCallback<User> OnUserSaved { get; set; }
+    public EventCallback<Account> OnUserSaved { get; set; }
 
     public void Show()
     {
@@ -75,4 +75,6 @@
         us.AddUser(newUser);
         Close();
     }
+
+
 }

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BookingVerseFinal.Components.Models
 {
-    public class User
+    public class Account
     {
-        public User()
+        public Account()
         {
         }
 
-        public User(int usertId, string password, string email, string firstName, string lastName)
+        public Account(int usertId, string password, string email, string firstName, string lastName)
         {
             UsertId = usertId;
             Password = password;
