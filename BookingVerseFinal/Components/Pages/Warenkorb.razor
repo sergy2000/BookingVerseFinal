@@ -75,7 +75,7 @@
     private void BuyItemFromWarenkorb(Event eventItem)
     {
 
-        if (UserService.GetUser().Count == 0)
+        if (UserService.GetUsers().Count == 0)
         {
             popupRef.Show();
         }

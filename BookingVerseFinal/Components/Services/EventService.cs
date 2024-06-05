@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using BookingVerseFinal.Components.Models;
-using BookingVerseFinal.Components.Pages;
+﻿using BookingVerseFinal.Components.Models;
 
 namespace BookingVerseFinal.Components.Services
 {
@@ -8,10 +6,6 @@ namespace BookingVerseFinal.Components.Services
     {
         private List<Event> warenkorb = new List<Event>();
         private List<Event> orders = new List<Event>();
-        public List<Event> GetWarenkorb()
-        {
-            return warenkorb;
-        }
 
         public void AddToWarenkorb(Event eventItem)
         {
@@ -21,30 +15,19 @@ namespace BookingVerseFinal.Components.Services
             }
         }
 
-        public void RemoveFromWarenkorb(Event eventItem)
-        {
-            warenkorb.Remove(eventItem);
-        }
-
         public void AddToOrders(Event eventItem)
         {
-
             if (!orders.Where(x=> x.Equals(eventItem)).Any())
             {
-
-
                 orders.Add(eventItem);
             }
         }
 
-        public List<Event> GetOrders()
-        {
-            return orders;
-        }
+        public void RemoveFromWarenkorb(Event eventItem) => warenkorb.Remove(eventItem);
 
+        public List<Event> GetWarenkorb() => warenkorb;
 
-
+        public List<Event> GetOrders() => orders;
     }
-
-    }
+}
 

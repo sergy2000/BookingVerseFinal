@@ -1,5 +1,4 @@
 ﻿using BookingVerseFinal.Components.Services;
-using Microsoft.Extensions.Logging;
 
 namespace BookingVerseFinal
 {
@@ -17,10 +16,9 @@ namespace BookingVerseFinal
 
             builder.Services.AddMauiBlazorWebView();
 
-#if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
-#endif
+            #if DEBUG 
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            #endif
 
             builder.Services.AddSingleton<EventService>();
             builder.Services.AddSingleton<UserService>();

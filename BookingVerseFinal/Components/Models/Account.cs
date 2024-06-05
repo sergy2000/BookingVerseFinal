@@ -1,32 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookingVerseFinal.Components.Models
+﻿namespace BookingVerseFinal.Components.Models
 {
     public class Account
     {
-        public Account()
+        public int UserID { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public string FirstName {  get; set; }
+        public string LastName { get; set; }
+
+        public Account() 
         {
+            UserID = 0;
+            Password = string.Empty;
+            Email = string.Empty;
+            FirstName = string.Empty;
+            LastName = string.Empty;
         }
 
-        public Account(int usertId, string password, string email, string firstName, string lastName)
+        public Account(int userID, string password, string email, string firstName, string lastName)
         {
-            UsertId = usertId;
+            UserID = userID;
             Password = password;
             Email = email;
             FirstName = firstName;
             LastName = lastName;
         }
-
-        public int UsertId { get; set; }
-        public string Password { get; set; }
-
-        public string Email { get; set; }
-        public string FirstName {  get; set; }
-        public string LastName { get; set; }
-
     }
 }

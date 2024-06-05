@@ -1,41 +1,33 @@
 ﻿using BookingVerseFinal.Components.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.System;
 
 namespace BookingVerseFinal.Components.Services
 {
     internal class UserService
     {
+        public List<Account> Users;
 
-        public List<Account> Users = new List<Account>();             
-
-
-        
-       public List<Account> GetUser()
+        public UserService() 
         {
-            return Users;
+            Users =
+            [
+                new Account(1, "password123", "john.doe@example.com", "John", "Doe"),
+                new Account(2, "securepass", "jane.doe@example.com", "Jane", "Doe"),
+                new Account(3, "mypassword", "bob.smith@example.com", "Bob", "Smith"),
+                new Account(4, "letmein", "alice.jones@example.com", "Alice", "Jones"),
+                new Account(5, "password1", "charlie.brown@example.com", "Charlie", "Brown"),
+            ];
         }
 
         public void AddUser(Account sender)
         {
-            if (!Users.Any(x => x.UsertId.Equals(sender.UsertId)))
+            if (!Users.Any(x => x.UserID.Equals(sender.UserID)))
             {
                 Users.Add(sender);
             }
-
         }
 
-        public Account GetUserByEmail()
-        {
-            return Users.FirstOrDefault();
-        }
+        public List<Account> GetUsers() => Users;
 
-
-
-
+        public async Task<Account> GetUserByEmail() => await Task.Run(() => Users.First());
     }
 }
