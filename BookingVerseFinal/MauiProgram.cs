@@ -1,5 +1,6 @@
 ﻿using BookingVerseFinal.Components.Services;
 using Microsoft.Extensions.Logging;
+using System.IO;
 
 namespace BookingVerseFinal
 {
@@ -18,12 +19,18 @@ namespace BookingVerseFinal
             builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
 
             builder.Services.AddSingleton<EventService>();
             builder.Services.AddSingleton<UserService>();
+
+            // Pfad zur Datenbankdatei
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "mydatabase.db3");
+
+            // Registrieren Sie die Database-Klasse als Singleton und übergeben Sie den dbPath
+            builder.Services.AddSingleton<Database>(s => ActivatorUtilities.CreateInstance<Database>(s, dbPath));
 
             return builder.Build();
         }

@@ -3,6 +3,7 @@
 @using BookingVerseFinal.Components.Services
 @inject EventService EventService
 @inject UserService UserService
+@inject Database Database
 
 <div class="container mt-5">
     <div class="text-center mb-4">
@@ -61,29 +62,27 @@
 <PopupLogin @ref="popupRef" />
 
 @code {
-
     private PopupLogin popupRef;
 
-    private void RemoveItemFromWarenkorb(Event eventItem)
+    private async Task RemoveItemFromWarenkorb(Event eventItem)
     {
-
-
         EventService.RemoveFromWarenkorb(eventItem);
+        // Optional: Speichern Sie die Änderungen in der Datenbank
+         await Database.DeleteEventAsync(eventItem); // Wenn Sie Event in der Datenbank haben
     }
-
 
     private void BuyItemFromWarenkorb(Event eventItem)
     {
-
         if (UserService.GetUser().Count == 0)
         {
             popupRef.Show();
         }
+        else
+        {
+            if (UserService.GetUser().Count == 0)
+            {
+                popupRef.Show();
+            }
+        }
     }
-
-
-
-    }
-
-    
 }

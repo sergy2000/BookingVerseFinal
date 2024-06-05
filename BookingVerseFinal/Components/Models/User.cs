@@ -12,16 +12,16 @@ namespace BookingVerseFinal.Components.Models
         {
         }
 
-        public User(int usertId, string password, string email, string firstName, string lastName)
+        public User(string userId, string password, string email, string firstName, string lastName)
         {
-            UsertId = usertId;
+            UserId = userId;
             Password = password;
             Email = email;
             FirstName = firstName;
             LastName = lastName;
         }
 
-        public int UsertId { get; set; }
+        public string UserId { get; set; }
         public string Password { get; set; }
 
         public string Email { get; set; }

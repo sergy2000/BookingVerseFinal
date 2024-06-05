@@ -20,5 +20,7 @@
             this.Price = Price;
             this.Description = Description;
         }
+        
+        public Event() { }
     }
 }

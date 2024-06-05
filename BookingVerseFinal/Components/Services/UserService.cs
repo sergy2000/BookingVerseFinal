@@ -21,7 +21,7 @@ namespace BookingVerseFinal.Components.Services
 
         public void AddUser(User sender)
         {
-            if (!Users.Any(x => x.UsertId.Equals(sender.UsertId)))
+            if (!Users.Any(x => x.UserId.Equals(sender.UserId)))
             {
                 Users.Add(sender);
             }

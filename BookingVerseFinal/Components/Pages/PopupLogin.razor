@@ -2,6 +2,7 @@
 @using BookingVerseFinal.Components.Services
 @using Microsoft.AspNetCore.Components.Forms
 @inject UserService us;
+@inject Database Database
 
 @{
     var showClass = IsVisible ? "d-block" : "d-none";
@@ -39,7 +40,7 @@
                     <InputText id="password" class="form-control" @bind-Value="newUser.Password" />
                 </div>
 
-                <button type="submit" class="btn btn-primary" onclick="">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
         </div>
     </div>
@@ -71,8 +72,8 @@
 
     private async Task HandleValidSubmit()
     {
+        await Database.SaveUserAsync(newUser);
         await OnUserSaved.InvokeAsync(newUser);
-        us.AddUser(newUser);
         Close();
     }
 }
