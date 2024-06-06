@@ -1,7 +1,7 @@
 ﻿@using BookingVerseFinal.Components.Models
 @using BookingVerseFinal.Components.Services
 @using Microsoft.AspNetCore.Components.Forms
-@inject UserService us;
+@inject UserService UserService;
 
 @{
     var showClass = IsVisible ? "d-block" : "d-none";
@@ -20,6 +20,11 @@
                 <ValidationSummary />
 
                 <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <InputText id="email" type="email" class="form-control" @bind-Value="newUser.Email" />
+                </div>
+
+                <div class="mb-3">
                     <label for="firstname" class="form-label">First Name</label>
                     <InputText id="firstname" class="form-control" @bind-Value="newUser.FirstName" />
                 </div>
@@ -27,11 +32,6 @@
                 <div class="mb-3">
                     <label for="lastname" class="form-label">Last Name</label>
                     <InputText id="lastname" class="form-control" @bind-Value="newUser.LastName" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <InputText id="email" type="email" class="form-control" @bind-Value="newUser.Email" />
                 </div>
 
                 <div class="mb-3">
@@ -72,7 +72,7 @@
     private async Task HandleValidSubmit()
     {
         await OnUserSaved.InvokeAsync(newUser);
-        us.AddUser(newUser);
+        UserService.AddUser(newUser);
         Close();
     }
 }

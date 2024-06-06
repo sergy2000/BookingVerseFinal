@@ -18,9 +18,9 @@ namespace BookingVerseFinal.Components.Services
             ];
         }
 
-        public void AddUser(Account sender)
+        public async Task AddUser(Account sender)
         {
-            if (!Users.Any(x => x.UserID.Equals(sender.UserID)))
+            if (await Task.Run(() => !Users.Any(x => x.UserID.Equals(sender.UserID))))
             {
                 Users.Add(sender);
             }
