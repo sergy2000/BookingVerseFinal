@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingVerseFinal", "BookingVerseFinal\BookingVerseFinal.csproj", "{041D9A1C-6CC4-445C-98F6-1BF8F69A7C52}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingVerseFinalAPI", "BookingVerseFinalAPI\BookingVerseFinalAPI.csproj", "{62E7419D-0444-4474-AAEB-C8DECA62F716}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{041D9A1C-6CC4-445C-98F6-1BF8F69A7C52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{041D9A1C-6CC4-445C-98F6-1BF8F69A7C52}.Release|Any CPU.Build.0 = Release|Any CPU
 		{041D9A1C-6CC4-445C-98F6-1BF8F69A7C52}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{62E7419D-0444-4474-AAEB-C8DECA62F716}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62E7419D-0444-4474-AAEB-C8DECA62F716}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62E7419D-0444-4474-AAEB-C8DECA62F716}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62E7419D-0444-4474-AAEB-C8DECA62F716}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
