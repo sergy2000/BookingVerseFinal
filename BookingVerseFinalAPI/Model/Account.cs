@@ -1,24 +1,24 @@
-﻿namespace BookingVerseFinalAPI.Model
+﻿using System.ComponentModel.DataAnnotations;
+using ServiceStack.DataAnnotations;
+using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;  // Falls benötigt
+
+namespace BookingVerseFinalAPI.Model
 {
     public class Account
     {
-        public Account(int id, string firstName, string lastName, string email, string password)
-        {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-        }
-
+        [Key, AutoIncrement]
         public int Id { get; set; }
+
+        [Required]
         public string FirstName { get; set; }
+
+        [Required]
         public string LastName { get; set; }
+
+        [Required, EmailAddress]
         public string Email { get; set; }
+
+        [Required]
         public string Password { get; set; }
-
     }
-
-
-
 }

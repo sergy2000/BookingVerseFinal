@@ -1,9 +1,12 @@
-﻿namespace BookingVerseFinalAPI.Model
+﻿using ServiceStack.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+
+namespace BookingVerseFinalAPI.Model
 {
     public class Event
     {
-
-        public int Id { get; set; }
+        [Key, AutoIncrement]
+        public int ID { get; set; }
         public string Title { get; set; }
         public DateTime Date { get; set; }
         public string Location { get; set; }

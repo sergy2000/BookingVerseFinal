@@ -11,6 +11,25 @@ namespace BookingVerseFinalAPI.Database
         public DbSet<Account> Users { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Order> Orders { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Account>()
+                .HasIndex(a => a.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<Order>()
+               .HasOne(o => o.Account)
+               .WithMany()
+               .HasForeignKey(o => o.AccountID);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Event)
+                .WithMany()
+                .HasForeignKey(o => o.EventID);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
 
