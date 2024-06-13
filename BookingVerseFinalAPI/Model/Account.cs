@@ -1,13 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using ServiceStack.DataAnnotations;
-using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;  // Falls benötigt
+using System.ComponentModel.DataAnnotations.Schema;
+using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
 
 namespace BookingVerseFinalAPI.Model
 {
     public class Account
     {
-        [Key, AutoIncrement]
-        public int Id { get; set; }
+        public Account(string firstName, string lastName, string email, string password)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+        }
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -15,7 +24,8 @@ namespace BookingVerseFinalAPI.Model
         [Required]
         public string LastName { get; set; }
 
-        [Required, EmailAddress]
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
