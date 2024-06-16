@@ -5,8 +5,11 @@ namespace BookingVerseFinalAPI.Model
 {
     public class Event
     {
-        public Event(string _title, DateTime _date, string _location, string _category, decimal _price, string _description)
+
+        public Event() { }
+        public Event(int _id,string _title, DateTime _date, string _location, string _category, decimal _price, string _description)
         {
+            ID = _id;
             Title = _title;
             Date = _date;
             Location = _location;
