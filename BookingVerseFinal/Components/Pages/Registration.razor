@@ -1,0 +1,82 @@
+﻿@page "/registration"
+
+@using BookingVerseFinal.Components.Models
+@using BookingVerseFinal.Components.Services
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject UserService UserService;
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <h3>Registration</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <div class="toast-container p-3 d-block" data-bs-autohide="true" data-bs-delay="5000">
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-body">
+                        <EditForm Model="@user" OnValidSubmit="HandleValidSubmit">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary />
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <InputText id="email" type="email" class="form-control" @bind-Value="user.Email" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <InputText id="password" class="form-control" @bind-Value="user.Password" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="firstname" class="form-label">First Name</label>
+                                <InputText id="firstname" class="form-control" @bind-Value="user.FirstName" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="lastname" class="form-label">Last Name</label>
+                                <InputText id="lastname" class="form-control" @bind-Value="user.LastName" />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" onclick="">Register</button>
+                        </EditForm>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col">Already Registered?</div>
+    </div>
+</div>
+
+
+@code 
+{
+    private Account user;
+
+    public Registration()
+    {
+        user = new Account(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitializedAsync();
+        
+    }
+
+    [Parameter]
+    public EventCallback<Account> OnUserSaved { get; set; }
+
+    private async Task HandleValidSubmit()
+    {
+        await OnUserSaved.InvokeAsync(user);
+        await UserService.AddUser(user);
+    }
+}
