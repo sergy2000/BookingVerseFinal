@@ -30,13 +30,13 @@ namespace BookingVerseFinalAPI.Database
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Account>().HasData(
-                new Account("Hans", "Müller", "admin1@example.com", "admin123") { ID = 1 },
-                new Account("John", "Doe", "user1@example.com", "user123") { ID = 2 }
+                new Account(1,"Hans", "Mueller", "admin1@example.com", "admin123"),
+                new Account(2,"John", "Doe", "user1@example.com", "user123")
             );
 
             modelBuilder.Entity<Event>().HasData(
-                new Event("Event 1", DateTime.Now, "Location 1", "Category 1", 50.0M, "Description 1") { ID = 1 },
-                new Event("Event 2", DateTime.Now, "Location 2", "Category 2", 75.0M, "Description 2") { ID = 2 }
+                new Event(1,"Event 1", DateTime.Now, "Location 1", "Category 1", 50.0M, "Description 1") ,
+                new Event(2,"Event 2", DateTime.Now, "Location 2", "Category 2", 75.0M, "Description 2")
             );
         }
     }

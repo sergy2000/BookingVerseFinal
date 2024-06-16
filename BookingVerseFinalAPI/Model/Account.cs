@@ -6,13 +6,16 @@ namespace BookingVerseFinalAPI.Model
 {
     public class Account
     {
-        public Account(string firstName, string lastName, string email, string password)
+        public Account(int _id,string firstName, string lastName, string email, string password)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
+            ID = _id;
         }
+
+        public Account() { }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
