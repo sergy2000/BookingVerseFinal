@@ -1,41 +1,35 @@
-﻿@using BookingVerseFinal.Components.Models
+﻿@page "/login"
+
+@using BookingVerseFinal.Components.Models
 @using BookingVerseFinal.Components.Services
 @using Microsoft.AspNetCore.Components.Forms
 
 @inject UserService UserService;
 
-@{ var showClass = IsVisible ? "d-block" : "d-block"; }
-
 <div class="container text-center">
-    <div class="row" style="outline-style:solid">
-        <div class="col" style="outline-style:solid">col</div>
+    <div class="row">
+        <div class="col">
+            <h3>Login</h3>
+        </div>
     </div>
-    <div class="row" style="outline-style:solid">
+    <div class="row">
         <div class="col"></div>
-        <div class="col" style="outline-style:solid">
-            <div class="toast-container p-3 @showClass" data-bs-autohide="true" data-bs-delay="5000">
+        <div class="col">
+            <div class="toast-container p-3 d-block" data-bs-autohide="true" data-bs-delay="5000">
                 <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <strong class="me-auto">New User</strong>
-                        <button type="button" class="btn-close" aria-label="Close" @onclick="Close"></button>
-                    </div>
-
                     <div class="toast-body">
-                        <EditForm Model="@newUser" OnValidSubmit="HandleValidSubmit">
+                        <EditForm Model="@user" OnValidSubmit="HandleValidSubmit">
                             <DataAnnotationsValidator />
                             <ValidationSummary />
-
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <InputText id="email" type="email" class="form-control" @bind-Value="newUser.Email" />
+                                <InputText id="email" type="email" class="form-control" @bind-Value="user.Email" />
                             </div>
-
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <InputText id="password" class="form-control" @bind-Value="newUser.Password" />
+                                <InputText id="password" class="form-control" @bind-Value="user.Password" />
                             </div>
-
-                            <button type="submit" class="btn btn-primary" onclick="">Save</button>
+                            <button type="submit" class="btn btn-primary" onclick="">Login</button>
                         </EditForm>
                     </div>
                 </div>
@@ -43,41 +37,32 @@
         </div>
         <div class="col"></div>
     </div>
-    <div class="row" style="outline-style:solid">
-        <div class="col" style="outline-style:solid">col</div>
+    <div class="row">
+        <div class="col">Not Registered?</div>
     </div>
 </div>
 
 
 @code
 {
-    private Account newUser = new Account();
+    private Account user;
 
-    [Parameter]
-    public bool IsVisible { get; set; }
+    public Login()
+    {
+        user = new Account(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+    }
 
-    [Parameter]
-    public EventCallback<bool> IsVisibleChanged { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+    }
 
     [Parameter]
     public EventCallback<Account> OnUserSaved { get; set; }
 
-    public void Show()
-    {
-        IsVisible = true;
-        StateHasChanged();
-    }
-
-    public void Close()
-    {
-        IsVisible = false;
-        StateHasChanged();
-    }
-
     private async Task HandleValidSubmit()
     {
-        await OnUserSaved.InvokeAsync(newUser);
-        UserService.AddUser(newUser);
-        Close();
+        await OnUserSaved.InvokeAsync(user);
+        await UserService.AddUser(user);
     }
 }
