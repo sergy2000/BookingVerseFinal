@@ -1,4 +1,5 @@
 ﻿using BookingVerseFinal.Components.Services;
+using BookingVerseFinal.Services;
 
 namespace BookingVerseFinal
 {
@@ -13,15 +14,18 @@ namespace BookingVerseFinal
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
-
+            
+            builder.Services.AddScoped<EventService>();
+            builder.Services.AddScoped<ShoppingCartService>();
+            builder.Services.AddScoped<UserService>();
             builder.Services.AddMauiBlazorWebView();
 
             #if DEBUG 
             builder.Services.AddBlazorWebViewDeveloperTools();
-            #endif
+#endif
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7174/api/") });
 
-            builder.Services.AddSingleton<EventService>();
-            builder.Services.AddSingleton<UserService>();
+           
 
             return builder.Build();
         }

@@ -1,6 +1,8 @@
 ﻿@page "/"
+@using BookingVerseFinal.Components.Logging
 @using BookingVerseFinal.Components.Models
 @using BookingVerseFinal.Components.Services
+@using BookingVerseFinal.Services
 @inject EventService EventService
 
 <div class="container mt-5">
@@ -28,7 +30,7 @@
                 <tbody>
                     @foreach (var Event in storedEvents)
                     {
-                        <tr @onclick="() => AddItemToWarenkorb(Event)" data-bs-toggle="tooltip" title="Click to add to Warenkorb">
+                       <tr @onclick="() => AddItemToWarenkorb(Event)" data-bs-toggle="tooltip" title="Click to add to Warenkorb">
                             <td>@Event.Title</td>
                             <td>@Event.Date.ToShortDateString()</td>
                             <td>@Event.Location</td>
@@ -46,20 +48,41 @@
 @code {
     private List<Event> storedEvents = new List<Event>();
     private bool tableActive = false;
+    private Event selectedEvent = new Event();
+
+    public async Task AddItemToWarenkorb(Event o)
+    {
+        storedEvents.Remove(o);
+
+        await EventService.GetEventByIdAsync(o.EventID);
+
+
+
+
+
+    }
 
     protected override void OnInitialized()
     {
-        for (int i = 1; i <= 20; i++)
-        {
-            storedEvents.Add(new Event(i.ToString(), $"Event {i}", DateTime.Now, "Hamburg", "Essen gehen", i * i * i, $"Legit Event"));
-        }
+
     }
 
     private void ShowTable() => tableActive = !tableActive;
 
-    private void AddItemToWarenkorb(Event item)
+    protected override async Task OnInitializedAsync()
     {
-        EventService.AddToWarenkorb(item);
-        storedEvents.Remove(item);
-    }
+        try
+        {
+            storedEvents = await EventService.GetEventsAsync();
+
+
+        }
+        catch (Exception ex)
+        {
+           
+        }
+
+}
+
+
 }

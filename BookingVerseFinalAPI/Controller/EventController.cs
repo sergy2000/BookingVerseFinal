@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using BookingVerseFinalAPI.Database;
 using BookingVerseFinalAPI.Model;
+using System;
 
 namespace BookingVerseApi.Controllers
 {
@@ -25,17 +26,15 @@ namespace BookingVerseApi.Controllers
             return await _context.Events.ToListAsync();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEvent(int id)
+        [HttpPut("{id}")]
+        public async Task GetEvent(int id)
         {
             var eventItem = await _context.Events.FindAsync(id);
 
-            if (eventItem == null)
-            {
-                return NotFound();
-            }
+            //_context.Add<Order>(new Order { });
+            //_context.SaveChanges();
 
-            return eventItem;
+
         }
 
         [HttpPost]
@@ -47,7 +46,7 @@ namespace BookingVerseApi.Controllers
             return CreatedAtAction(nameof(GetEvent), new { id = eventItem.ID }, eventItem);
         }
 
-        [HttpPut("{id}")]
+       /* [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEvent(int id, [FromBody] Event eventItem)
         {
             if (id != eventItem.ID)
@@ -75,7 +74,7 @@ namespace BookingVerseApi.Controllers
 
             return NoContent();
         }
-
+       */
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEvent(int id)
         {

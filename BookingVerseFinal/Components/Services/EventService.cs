@@ -1,33 +1,40 @@
-﻿using BookingVerseFinal.Components.Models;
+﻿using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using BookingVerseFinal.Components.Models;
+using Microsoft.Extensions.Logging;
 
-namespace BookingVerseFinal.Components.Services
+namespace BookingVerseFinal.Services
 {
     public class EventService
     {
-        private List<Event> warenkorb = new List<Event>();
-        private List<Event> orders = new List<Event>();
+        private readonly HttpClient _httpClient;
 
-        public void AddToWarenkorb(Event eventItem)
+        public EventService(HttpClient httpClient)
         {
-            if (!warenkorb.Any(x => x.EventID.Equals(eventItem.EventID)))
-            {
-                warenkorb.Add(eventItem);
-            }
+            _httpClient = httpClient;
         }
 
-        public void AddToOrders(Event eventItem)
+        public async Task<List<Event>> GetEventsAsync()
         {
-            if (!orders.Where(x=> x.Equals(eventItem)).Any())
-            {
-                orders.Add(eventItem);
-            }
+            return await _httpClient.GetFromJsonAsync<List<Event>>("Event") ?? [];
         }
 
-        public void RemoveFromWarenkorb(Event eventItem) => warenkorb.Remove(eventItem);
+        public async Task<Event> GetEventByIdAsync(int id)
+        {
+            return await _httpClient.GetFromJsonAsync<Event>($"Event/{id}") ?? new Event();
+        }
 
-        public List<Event> GetWarenkorb() => warenkorb;
+        public async Task<HttpResponseMessage> CreateEventAsync(int eventId)
+        {
+            return await _httpClient.PostAsJsonAsync($"Event{eventId}", new { EventId = eventId });
+        }
 
-        public List<Event> GetOrders() => orders;
+
+        public async Task<HttpResponseMessage> DeleteEventAsync(int id)
+        {
+            return await _httpClient.DeleteAsync($"Event/{id}");
+        }
     }
 }
-

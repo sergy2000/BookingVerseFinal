@@ -2,7 +2,10 @@
 {
     public class Event
     {
-        public string EventID { get; set; }
+
+        public Event() { }
+
+        public int EventID { get; set; }
         public string Title { get; set; }
         public DateTime Date { get; set; }
         public string Location { get; set; }
@@ -10,7 +13,7 @@
         public decimal Price { get; set; }
         public string? Description { get; set; }
 
-        public Event(string EventID, string Title, DateTime Date, string Location, string Category, decimal Price, string Description)
+        public Event(int EventID, string Title, DateTime Date, string Location, string Category, decimal Price, string Description)
         {
             this.EventID = EventID;
             this.Title = Title;

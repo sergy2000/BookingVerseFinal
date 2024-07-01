@@ -1,14 +1,15 @@
 ﻿@page "/warenkorb"
 @using BookingVerseFinal.Components.Models
 @using BookingVerseFinal.Components.Services
+@using BookingVerseFinal.Services
 @inject EventService EventService
 @inject UserService UserService
-
+<!--
 <div class="container mt-5">
     <div class="text-center mb-4">
         <h1><i class="bi bi-cart-fill"></i> Warenkorb</h1>
     </div>
-
+   
     @if (EventService.GetWarenkorb().Count == 0)
     {
         <div class="alert alert-warning" role="alert">
@@ -59,31 +60,32 @@
     }
 </div>
 <PopupLogin @ref="popupRef" />
+-->
 
 @code {
+            /*
+private PopupLogin popupRef;
 
-    private PopupLogin popupRef;
+private void RemoveItemFromWarenkorb(Event eventItem)
+{
 
-    private void RemoveItemFromWarenkorb(Event eventItem)
+
+    EventService.RemoveFromWarenkorb(eventItem);
+}
+
+
+private void BuyItemFromWarenkorb(Event eventItem)
+{
+
+    if (UserService.GetUsers().Count == 0)
     {
-
-
-        EventService.RemoveFromWarenkorb(eventItem);
+        popupRef.Show();
     }
 
-
-    private void BuyItemFromWarenkorb(Event eventItem)
-    {
-
-        if (UserService.GetUsers().Count == 0)
-        {
-            popupRef.Show();
-        }
-
-        EventService.AddToOrders(eventItem);
+    EventService.AddToOrders(eventItem);
     }
 
     }
 
-    
+    */
 }
